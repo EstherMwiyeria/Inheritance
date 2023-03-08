@@ -9,6 +9,7 @@ var bus = Bus("type c","martz","red",7)
     bus.identity()
     bus.carry(14)
     println(bus.maximumAmount(20.0))
+    println(bus.calculateParkingFees(24))
 }
 open class Vehicle(var make: String,var model: String,var color: String,var capacity: Int){
     fun carry(people: Int){
@@ -22,7 +23,7 @@ open class Vehicle(var make: String,var model: String,var color: String,var capa
     fun identity(){
         println("I am a $color $make $model")
     }
-    fun calculateParkingFees(hours: Int): Int{
+    open fun calculateParkingFees(hours: Int): Int{
         var calculation= hours*20
         return calculation
     }
@@ -34,6 +35,13 @@ class Car( make: String,model: String,color: String,capacity:Int):Vehicle(make, 
 class Bus(make: String,model: String,color: String,capacity: Int):Vehicle(make, model, color, capacity){
     fun maximumAmount(fare: Double): Double{
         return fare.times(capacity)
+    }
+
+    override fun calculateParkingFees(hours: Int): Int {
+//        return super.calculateParkingFees(hours)
+        var calc=hours*capacity
+        return calc
+
     }
     }
 
